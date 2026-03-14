@@ -52,6 +52,7 @@ def run_single_model(model_name, dataset_name='mooper', save_dir='./results'):
         'ITEM_ID_FIELD': 'item_id',
         'TIME_FIELD': 'timestamp',
         'max_item_list_len': 50,
+        'train_neg_sample_args': None,  # CE loss 不需要负采样
         
         # 评估设置 - 序列推荐需要使用 leave-one-out 评估
         'eval_args': {
