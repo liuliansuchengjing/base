@@ -13,14 +13,17 @@ import sys
 IS_KAGGLE = 'KAGGLE_KERNEL_RUN_TYPE' in os.environ
 
 if IS_KAGGLE:
-    # Kaggle 路径设置
-    WORK_DIR = '/kaggle/working'
-    DATA_DIR = '/kaggle/input'  # 需要上传数据到 Kaggle Dataset
-    OUTPUT_DIR = '/kaggle/working/results'
+    # Kaggle 路径设置 - 项目在 /kaggle/working/base/
+    WORK_DIR = '/kaggle/working/base'
+    DATA_DIR = '/kaggle/working/base/dataset'  # 数据集在项目内
+    OUTPUT_DIR = '/kaggle/working/base/results'
     
     print("检测到 Kaggle 环境")
     print(f"工作目录: {WORK_DIR}")
     print(f"数据目录: {DATA_DIR}")
+    
+    # 切换工作目录
+    os.chdir(WORK_DIR)
     
     # 安装依赖（Kaggle 默认已有大部分依赖）
     print("\n安装 RecBole...")
@@ -202,19 +205,15 @@ def main():
     print(f'{"#"*80}\n')
     
     # 数据路径
-    if IS_KAGGLE:
-        # Kaggle 中数据集路径需要根据实际上传的数据集名称调整
-        # 假设数据集上传后路径为 /kaggle/input/mooper/mooper/
-        data_path = '/kaggle/input'
-        
-        # 检查数据是否存在
-        dataset_path = os.path.join(data_path, DATASET_NAME, DATASET_NAME)
-        if not os.path.exists(dataset_path):
-            print(f"错误: 数据集不存在于 {dataset_path}")
-            print("请确保已上传数据集到 Kaggle")
-            return
-    else:
-        data_path = './dataset'
+    data_path = DATA_DIR
+    
+    # 检查数据是否存在
+    dataset_path = os.path.join(data_path, DATASET_NAME)
+    if not os.path.exists(dataset_path):
+        print(f"错误: 数据集不存在于 {dataset_path}")
+        print(f"当前工作目录: {os.getcwd()}")
+        print(f"数据目录内容: {os.listdir(data_path) if os.path.exists(data_path) else '不存在'}")
+        return
     
     # 运行所有模型
     all_results = {}
