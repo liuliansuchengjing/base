@@ -22,7 +22,7 @@ except ImportError as e:
     sys.exit(1)
 
 
-def run_single_model(model_name, dataset_name='mooper', save_dir='./results'):
+def run_single_model(model_name, dataset_name='assist09', save_dir='./results'):
     """
     运行单个模型并立即保存结果
     
