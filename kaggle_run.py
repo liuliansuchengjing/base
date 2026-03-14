@@ -48,7 +48,7 @@ import torch
 
 
 # ============== 配置 ==============
-DATASET_NAME = 'mooper'  # 数据集名称
+DATASET_NAME = 'assist09'  # 数据集名称
 MODELS = ['SASRec', 'GRU4Rec', 'SRGNN']  # 要运行的模型
 SAVE_DIR = os.path.join(WORK_DIR, 'results')
 MODEL_DIR = os.path.join(WORK_DIR, 'saved_models')
