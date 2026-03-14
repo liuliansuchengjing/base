@@ -78,17 +78,16 @@ def run_single_model(model_name, dataset_name, data_path):
         'ITEM_ID_FIELD': 'item_id',
         'TIME_FIELD': 'timestamp',
         'max_item_list_len': 50,
-        'train_neg_sample_args': None,
         
-        # 评估设置
+        # 评估设置 - 序列推荐需要使用 leave-one-out 评估
         'eval_args': {
-            'split': {'RS': [0.8, 0.1, 0.1]},
+            'split': {'LS': 'valid_and_test'},
             'order': 'TO',
             'group_size': 1,
-            'leave_one_num': 1,
-            'mode': 'labeled'
+            'leave_one_num': 2,
+            'mode': 'full'
         },
-        'metrics': ['Hit', 'NDCG', 'MRR', 'MAP'],
+        'metrics': ['Hit', 'NDCG', 'MRR'],
         'topk': [5, 10, 20],
         'valid_metric': 'Hit@10',
         
