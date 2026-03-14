@@ -86,7 +86,7 @@ def run_single_model(model_name, dataset_name, data_path):
             'order': 'TO',
             'group_size': 1,
             'leave_one_num': 1,
-            'mode': 'valid'
+            'mode': 'labeled'
         },
         'metrics': ['Hit', 'NDCG', 'MRR', 'MAP'],
         'topk': [5, 10, 20],
