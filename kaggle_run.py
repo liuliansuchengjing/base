@@ -26,8 +26,8 @@ if IS_KAGGLE:
     os.chdir(WORK_DIR)
     
     # 安装依赖（Kaggle 默认已有大部分依赖）
-    print("\n安装 RecBole...")
-    os.system('pip install recbole -q')
+    print("\n安装 RecBole (需要降级 NumPy 到 1.x)...")
+    os.system('pip install "numpy<2.0" recbole -q')
 else:
     # 本地环境
     WORK_DIR = '.'
